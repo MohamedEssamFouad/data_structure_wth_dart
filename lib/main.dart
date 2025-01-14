@@ -1,6 +1,8 @@
 
 
 
+import 'dart:collection';
+
 class Stack<T> ///generic to hold any data type
 {
   final List<T> _stack=[]; ///private list
@@ -19,6 +21,14 @@ class Stack<T> ///generic to hold any data type
     List<T>get elements=>List.unmodifiable(_stack);
 }
 void main() {
+  final Queue<int> queue = Queue<int>();
+  queue.addLast(10); // Enqueue
+  queue.addLast(20);
+  queue.addLast(30);
+
+  print("Front element: ${queue.first}"); // 10
+  print("Dequeued: ${queue.removeFirst()}"); // 10
+  print("Queue is empty: ${queue.isEmpty}"); // false
   final stack =Stack<int>();
   stack.push(10);
   stack.push(20);
