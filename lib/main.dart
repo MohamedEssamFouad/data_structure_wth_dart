@@ -19,8 +19,41 @@ class Stack<T> ///generic to hold any data type
     bool get isEmpty=>_stack.isNotEmpty;
     int get size =>_stack.length;
     List<T>get elements=>List.unmodifiable(_stack);
+  int evaluatePostfix(String expression) {
+    final stack = Stack<int>();
+
+    for (var char in expression.split('')) {
+      if (int.tryParse(char) != null) {
+        stack.push(int.parse(char));
+      } else {
+        final b = stack.pop();
+        final a = stack.pop();
+
+        switch (char) {
+          case '+':
+            stack.push(a + b);
+            break;
+          case '-':
+            stack.push(a - b);
+            break;
+          case '*':
+            stack.push(a * b);
+            break;
+          case '/':
+            stack.push(a ~/ b);
+            break;
+        }
+      }
+    }
+
+    return stack.pop();
+
+  }
+
+
 }
 void main() {
+
   final Queue<int> queue = Queue<int>();
   queue.addLast(10); // Enqueue
   queue.addLast(20);
@@ -37,5 +70,6 @@ void main() {
   print("Popped: ${stack.pop()}"); // 30
   print("Stack is empty: ${stack.isEmpty}"); // false
   print("Stack elements after pop: ${stack.elements}");
+
 
 }
